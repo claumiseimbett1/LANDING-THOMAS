@@ -15,6 +15,22 @@
             --hero-fallback: #141210;
             /* Altura del header fijo (nav + logos + borde); se ajusta en móvil */
             --site-header-offset: calc(102px + env(safe-area-inset-top, 0px));
+            /* Botones con rata: mismo vidrio degradé (hero / fondos oscuros) */
+            --cta-glass-gradient: linear-gradient(
+                155deg,
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 0.06) 45%,
+                rgba(0, 0, 0, 0.12) 100%
+            );
+            /* Misma familia, un poco más de sombra en el degradé: fondos claros (contacto, bio) para leer la rata blanca */
+            --cta-glass-gradient-light: linear-gradient(
+                155deg,
+                rgba(255, 255, 255, 0.18) 0%,
+                rgba(255, 255, 255, 0.06) 42%,
+                rgba(0, 0, 0, 0.26) 100%
+            );
+            --cta-glass-inset: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+            --cta-glass-blur: blur(18px) saturate(1.12);
         }
 
         html {
@@ -349,16 +365,26 @@
             align-items: stretch;
         }
 
-        /* CTA estilo icono + texto (como claumiseimbett.com): rata a la izquierda, bien visible */
+        /* CTA hero: ambos con el mismo vidrio; solo cambia borde y color de relleno en hover */
         .cta-button {
-            background-color: var(--black);
+            background: var(--cta-glass-gradient);
             color: var(--white);
             padding: 14px 22px;
             border: 2px solid var(--gold);
             border-radius: 30px;
             font-size: 1.05em;
             cursor: pointer;
-            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            box-shadow: var(--cta-glass-inset);
+            backdrop-filter: var(--cta-glass-blur);
+            -webkit-backdrop-filter: var(--cta-glass-blur);
+            transition:
+                background 0.3s ease,
+                backdrop-filter 0.3s ease,
+                -webkit-backdrop-filter 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                transform 0.3s ease;
             text-decoration: none;
             display: inline-flex;
             flex-direction: row;
@@ -377,14 +403,13 @@
             flex-shrink: 0;
             width: 50px;
             height: 50px;
+            min-width: 50px;
+            min-height: 50px;
             background: url('../logos/Ratabart666-Transp-Blanco.png') center / contain no-repeat;
             opacity: 1;
             pointer-events: none;
+            filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.4));
             transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .cta-button.secondary::before {
-            filter: drop-shadow(0 0 12px rgba(15, 226, 255, 0.55));
         }
 
         /* Evita el azul por defecto del navegador en enlaces externos */
@@ -394,43 +419,38 @@
             color: var(--white);
         }
 
+        .cta-button.secondary {
+            border-color: var(--cyan);
+        }
+
         @media (hover: hover) {
             .cta-button:hover {
-                background-color: var(--gold);
-                color: var(--black);
+                background: var(--gold);
                 border-color: var(--gold);
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                color: var(--black);
                 transform: translateY(-3px);
-                box-shadow: 0 8px 28px rgba(214, 193, 1, 0.45), 0 0 24px rgba(15, 226, 255, 0.25);
+                box-shadow:
+                    0 8px 28px rgba(214, 193, 1, 0.45),
+                    0 0 24px rgba(15, 226, 255, 0.25),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.45);
             }
 
+            /* Misma PNG transparente (rata blanca); en fondos claros se oscurece sin “caja” blanca */
             .cta-button:hover::before {
                 transform: scale(1.06);
-                filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+                filter: brightness(0) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
             }
 
             .cta-button.secondary:hover {
                 background: var(--cyan);
-                color: var(--black);
                 border-color: var(--cyan);
-                box-shadow: 0 8px 28px rgba(15, 226, 255, 0.4);
+                box-shadow:
+                    0 8px 28px rgba(15, 226, 255, 0.4),
+                    0 0 24px rgba(15, 226, 255, 0.22),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.45);
             }
-
-            .cta-button.secondary:hover::before {
-                transform: scale(1.05);
-                filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
-            }
-        }
-
-        .cta-button.secondary {
-            border-color: var(--cyan);
-            background: transparent;
-            color: #b8f7ff;
-        }
-
-        .cta-button.secondary:any-link,
-        .cta-button.secondary:link,
-        .cta-button.secondary:visited {
-            color: #b8f7ff;
         }
 
         .section-title {
@@ -863,6 +883,7 @@
             box-shadow:
                 0 6px 24px rgba(40, 35, 20, 0.06),
                 inset 0 1px 0 rgba(255, 255, 255, 0.95);
+            overflow: visible;
             transition:
                 transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
                 box-shadow 0.3s ease,
@@ -918,7 +939,7 @@
             letter-spacing: 0.015em;
         }
 
-        /* Misma píldora que LinkedIn (rata + icono + texto); color propio, no azul LinkedIn */
+        /* Misma píldora y vidrio degradé que los CTA del hero (fondo claro → gradiente un poco más profundo) */
         .bio-github-compact-arrow {
             flex-shrink: 0;
             display: inline-flex;
@@ -930,16 +951,26 @@
             padding: 14px 22px;
             border-radius: 30px;
             line-height: 1.25;
-            color: var(--white);
-            background: #24292f;
+            color: #141210;
+            background: var(--cta-glass-gradient-light);
             border: 2px solid var(--gold);
             font-weight: 600;
             font-size: 1em;
             width: auto;
             max-width: none;
             box-sizing: border-box;
+            box-shadow: var(--cta-glass-inset);
+            backdrop-filter: var(--cta-glass-blur);
+            -webkit-backdrop-filter: var(--cta-glass-blur);
             -webkit-tap-highlight-color: transparent;
-            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            transition:
+                background 0.3s ease,
+                backdrop-filter 0.3s ease,
+                -webkit-backdrop-filter 0.3s ease,
+                border-color 0.3s ease,
+                color 0.3s ease,
+                box-shadow 0.3s ease,
+                transform 0.3s ease;
         }
 
         .bio-github-compact-arrow::before {
@@ -948,9 +979,11 @@
             flex-shrink: 0;
             width: 46px;
             height: 46px;
+            min-width: 46px;
+            min-height: 46px;
             background: url('../logos/Ratabart666-Transp-Blanco.png') center / contain no-repeat;
             opacity: 1;
-            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.45));
+            filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.4));
             pointer-events: none;
             transition: transform 0.3s ease, filter 0.3s ease;
         }
@@ -963,10 +996,14 @@
         }
 
         .bio-github-compact-arrow-label {
-            font-weight: 600;
-            font-size: inherit;
+            font-weight: 800;
+            font-size: 1.05em;
+            letter-spacing: 0.06em;
             color: inherit;
             white-space: nowrap;
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, 0.9),
+                0 1px 0 rgba(255, 255, 255, 0.75);
         }
 
         @media (hover: hover) {
@@ -988,16 +1025,23 @@
             .bio-github-compact-link:hover .bio-github-compact-arrow {
                 background: var(--gold);
                 border-color: var(--gold);
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
                 color: var(--black);
                 transform: translateY(-2px);
                 box-shadow:
                     0 8px 28px rgba(214, 193, 1, 0.45),
-                    0 0 24px rgba(15, 226, 255, 0.25);
+                    0 0 24px rgba(15, 226, 255, 0.25),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+            }
+
+            .bio-github-compact-link:hover .bio-github-compact-arrow-label {
+                text-shadow: none;
             }
 
             .bio-github-compact-link:hover .bio-github-compact-arrow::before {
                 transform: scale(1.06);
-                filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+                filter: brightness(0) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
             }
         }
 
@@ -1014,6 +1058,20 @@
 
             .bio-github-compact-arrow {
                 margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+                max-width: 100%;
+                justify-content: center;
+                box-sizing: border-box;
+                padding: 12px 16px;
+                gap: 10px;
+            }
+
+            .bio-github-compact-arrow::before {
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+                min-height: 44px;
             }
         }
 
@@ -1042,7 +1100,7 @@
 
             .bio-github-compact-link:hover .bio-github-compact-arrow::before {
                 transform: none;
-                filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.45));
+                filter: brightness(0) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
             }
         }
 
@@ -1206,7 +1264,7 @@
             z-index: 2;
         }
 
-        /* Rata Ratabart: aparece al hover, esquina inferior derecha */
+        /* Rata Ratabart (solo PNG transparente; silueta oscura sobre tarjeta clara) */
         .service-card::after {
             content: '';
             position: absolute;
@@ -1214,7 +1272,8 @@
             bottom: -24px;
             width: 138px;
             height: 138px;
-            background: url('../logos/Ratabart666.png') center / contain no-repeat;
+            background: url('../logos/Ratabart666-Transp-Blanco.png') center / contain no-repeat;
+            filter: brightness(0);
             opacity: 0;
             transform: scale(0.88) rotate(-10deg);
             transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1303,17 +1362,38 @@
             gap: 12px;
             padding: 14px 22px;
             min-height: 52px;
-            background: #0077b5;
-            color: var(--white);
+            background: var(--cta-glass-gradient-light);
+            color: #141210;
             text-decoration: none;
             border-radius: 30px;
-            font-weight: 600;
+            font-weight: 800;
+            font-size: 1.02em;
+            letter-spacing: 0.045em;
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, 0.9),
+                0 1px 0 rgba(255, 255, 255, 0.75);
             border: 2px solid #0077b5;
-            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            box-shadow: var(--cta-glass-inset);
+            backdrop-filter: var(--cta-glass-blur);
+            -webkit-backdrop-filter: var(--cta-glass-blur);
+            transition:
+                background 0.3s ease,
+                backdrop-filter 0.3s ease,
+                -webkit-backdrop-filter 0.3s ease,
+                border-color 0.3s ease,
+                color 0.3s ease,
+                box-shadow 0.3s ease,
+                transform 0.3s ease;
             -webkit-tap-highlight-color: transparent;
             width: 100%;
             max-width: 340px;
             box-sizing: border-box;
+        }
+
+        .btn-linkedin:any-link,
+        .btn-linkedin:link,
+        .btn-linkedin:visited {
+            color: #141210;
         }
 
         /* Rata a la izquierda del icono de LinkedIn + texto */
@@ -1323,9 +1403,11 @@
             flex-shrink: 0;
             width: 46px;
             height: 46px;
+            min-width: 46px;
+            min-height: 46px;
             background: url('../logos/Ratabart666-Transp-Blanco.png') center / contain no-repeat;
             opacity: 1;
-            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.45));
+            filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.4));
             pointer-events: none;
             transition: transform 0.3s ease, filter 0.3s ease;
         }
@@ -1334,14 +1416,19 @@
             .btn-linkedin:hover {
                 background: var(--cyan);
                 border-color: var(--cyan);
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
                 color: var(--black);
+                text-shadow: none;
                 transform: translateY(-2px);
-                box-shadow: 0 8px 24px rgba(15, 226, 255, 0.35);
+                box-shadow:
+                    0 8px 24px rgba(15, 226, 255, 0.35),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.45);
             }
 
             .btn-linkedin:hover::before {
                 transform: scale(1.06);
-                filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+                filter: brightness(0) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
             }
         }
 
