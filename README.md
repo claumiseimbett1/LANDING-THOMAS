@@ -13,7 +13,7 @@ Aunque hoy el proyecto se sirve como **archivos HTML y CSS** (ideal para GitHub 
 | `contenidos/` | Subpáginas por tipo: apuntes, tareas, código, programas-apps, poemas |
 | `images/` | Imágenes del sitio (portada, biografía, etc.) |
 | `logos/` | Logos Thomas / Ratabart666 |
-| `robots.txt` / `sitemap.xml` | SEO y rastreo (URLs absolutas del sitio en producción) |
+| `robots.txt` / `sitemap.xml` | SEO: los buscadores usan la línea `Sitemap:` en `robots.txt`; no hace falta un enlace visible en el pie |
 
 ## Cómo actualizar contenido
 
