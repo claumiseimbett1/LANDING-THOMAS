@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Reemplaza https://www.tudominio.com por tu dominio en cada <loc>. -->
+<!-- URLs absolutas del sitio en Netlify -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://www.tudominio.com/</loc>
+        <loc>https://ratabart666.netlify.app/</loc>
         <lastmod>2026-04-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://www.tudominio.com/contenidos/apuntes.html</loc>
+        <loc>https://ratabart666.netlify.app/contenidos/apuntes.html</loc>
         <lastmod>2026-04-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.tudominio.com/contenidos/tareas.html</loc>
+        <loc>https://ratabart666.netlify.app/contenidos/tareas.html</loc>
         <lastmod>2026-04-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.tudominio.com/contenidos/codigo.html</loc>
+        <loc>https://ratabart666.netlify.app/contenidos/codigo.html</loc>
         <lastmod>2026-04-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.tudominio.com/contenidos/programas-apps.html</loc>
+        <loc>https://ratabart666.netlify.app/contenidos/programas-apps.html</loc>
         <lastmod>2026-04-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.tudominio.com/contenidos/poemas.html</loc>
+        <loc>https://ratabart666.netlify.app/contenidos/poemas.html</loc>
         <lastmod>2026-04-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>

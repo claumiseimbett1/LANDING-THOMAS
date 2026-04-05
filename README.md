@@ -13,7 +13,7 @@ Aunque hoy el proyecto se sirve como **archivos HTML y CSS** (ideal para GitHub 
 | `contenidos/` | Subpáginas por tipo: apuntes, tareas, código, programas-apps, poemas |
 | `images/` | Imágenes del sitio (portada, biografía, etc.) |
 | `logos/` | Logos Thomas / Ratabart666 |
-| `robots.txt` / `sitemap.xml` | SEO y rastreo (ajustar dominio al publicar) |
+| `robots.txt` / `sitemap.xml` | SEO y rastreo (URLs absolutas del sitio en producción) |
 
 ## Cómo actualizar contenido
 
@@ -34,11 +34,13 @@ npx --yes serve .
 
 Así las rutas relativas (`css/`, `contenidos/`) se comportan igual que en el servidor.
 
-## Publicación (GitHub Pages)
+## Publicación
 
-En el repositorio: **Settings → Pages → Build and deployment**: rama `main`, carpeta `/ (root)`.
+**Producción (Netlify):** [https://ratabart666.netlify.app/](https://ratabart666.netlify.app/) — despliegue conectado al repositorio; cada push a `main` puede disparar un nuevo build si está configurado.
 
-Después, reemplaza en todo el proyecto el marcador **`https://www.tudominio.com`** por la URL real (metadatos SEO, `canonical`, Open Graph, JSON-LD, `sitemap.xml`, `robots.txt`).
+**Repositorio:** el código vive en GitHub (`LANDING-THOMAS`). Si además quieres **GitHub Pages**, en el repo: **Settings → Pages** → rama `main`, carpeta `/ (root)`; entonces habría que alinear `canonical`, Open Graph, `sitemap.xml` y `robots.txt` con la URL `*.github.io` o usar un dominio personalizado coherente en todos los archivos.
+
+Si cambias de dominio (Netlify custom domain u otro), actualiza las mismas URLs absolutas en `index.html`, `contenidos/*.html`, `sitemap.xml` y `robots.txt`.
 
 ## Licencia y créditos
 
