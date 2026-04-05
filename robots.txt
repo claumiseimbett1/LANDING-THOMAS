@@ -1,0 +1,5 @@
+# Sustituye https://www.tudominio.com por la URL pública real (debe coincidir con sitemap.xml).
+User-agent: *
+Allow: /
+
+Sitemap: https://www.tudominio.com/sitemap.xml
